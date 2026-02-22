@@ -10,7 +10,7 @@ public class BoidManager : MonoBehaviour
     public int AgentNumber = 50;
     public float SpawnRadius = 20.0f;
 
-    private List<BoidAgent> Agents;
+    [SerializeField]  private List<BoidAgent> Agents;
 
     void Start()
     {
@@ -22,7 +22,7 @@ public class BoidManager : MonoBehaviour
             BoidAgent agentComponent = agent.GetComponent<BoidAgent>();
             Agents.Add(agentComponent);
 
-            Vector2 cerclePoint = (Random.insideUnitCircle * SpawnRadius);
+            Vector2 cerclePoint = Random.insideUnitCircle * SpawnRadius;
             Vector3 agentPosition = new Vector3(cerclePoint.x, cerclePoint.y, 0);
             Vector3 agentRotation = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
 
