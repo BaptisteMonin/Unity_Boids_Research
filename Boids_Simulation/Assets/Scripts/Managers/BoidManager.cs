@@ -18,16 +18,18 @@ public class BoidManager : MonoBehaviour
 
         for(int i = 0; i < AgentNumber; i++)
         {
-            GameObject agent = Instantiate(AgentPrefab);
-            BoidAgent agentComponent = agent.GetComponent<BoidAgent>();
-            Agents.Add(agentComponent);
+            GameObject Agent = Instantiate(AgentPrefab);
+            BoidAgent AgentComponent = Agent.GetComponent<BoidAgent>();
+            Agents.Add(AgentComponent);
 
             Vector2 cerclePoint = Random.insideUnitCircle * SpawnRadius;
             Vector3 agentPosition = new Vector3(cerclePoint.x, cerclePoint.y, 0);
             Vector3 agentRotation = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
 
-            agent.transform.position = agentPosition;
-            agent.transform.rotation = Quaternion.LookRotation(agentRotation);
+            Agent.transform.position = agentPosition;
+            Agent.transform.rotation = Quaternion.LookRotation(agentRotation);
+
+            AgentComponent.Initialize(AgentsSettings, Agents, Vector3.forward);
         }
     }
 }

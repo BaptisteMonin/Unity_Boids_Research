@@ -19,5 +19,5 @@ public class BoidSettings : ScriptableObject
 
     [Header("Distance")]
     public float VisualRange = 5.0f;
-    public float AvoidanceFactor = 1.0f;
+    public float AvoidanceRange = 1.0f;
 }
