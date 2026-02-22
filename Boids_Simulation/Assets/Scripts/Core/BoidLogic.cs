@@ -1,5 +1,7 @@
-using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.Rendering;
 
 public class BoidLogic : MonoBehaviour
 {
@@ -23,9 +25,31 @@ public class BoidLogic : MonoBehaviour
         return new Vector3(DirectX, DirectY, 0);
     }
 
-    Vector3 AlignmentAlgorithm()
+    Vector3 AlignmentAlgorithm(BoidAgent self, List<BoidAgent> otherAgents, float visualRange, float matchingFactor)
     {
-        return new Vector3(0, 0, 0);
+        float DirectAvgX = 0f;
+        float DirectAvgY = 0f;
+        int neighbourNbr = 0;
+
+        foreach (BoidAgent agent in otherAgents)
+        {
+            if (agent == self) continue;
+            float distance = Vector3.Distance(self.transform.position, agent.transform.position);
+            if (distance <= visualRange)
+            {
+                DirectAvgX += agent.Velocity.x;
+                DirectAvgY += agent.Velocity.y;
+                neighbourNbr += 1;
+            }
+        }
+        if(neighbourNbr > 0)
+        {
+            DirectAvgX = DirectAvgX / neighbourNbr;
+            DirectAvgY = DirectAvgY / neighbourNbr;
+        }
+        float DirectX = (DirectAvgX - self.Velocity.x) * matchingFactor;
+        float DirectY = (DirectAvgY - self.Velocity.y) * matchingFactor;
+        return new Vector3(DirectX, DirectY, 0);
     }
 
     Vector3 CohesionAlgorithm()
