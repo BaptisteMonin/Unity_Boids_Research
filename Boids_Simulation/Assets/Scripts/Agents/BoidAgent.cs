@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 public class BoidAgent : MonoBehaviour
 {
-    public Vector3 Velocity;
+    public Vector3 Velocity = Vector3.zero;
 
     private BoidSettings Settings;
     private List<BoidAgent> Agents;
@@ -13,20 +13,31 @@ public class BoidAgent : MonoBehaviour
     {
         List<BoidAgent> Neighbours = GetNeighbours(this, Agents);
 
-        Vector3 Cohesion = BoidLogic.CohesionAlgorithm(this, Neighbours, Settings.VisualRange, 0.01f);
-        Vector3 Alignment = BoidLogic.AlignmentAlgorithm(this, Neighbours, Settings.VisualRange, 0.1f);
-        Vector3 Separation = BoidLogic.SeparationAlgorithm(this, Neighbours, Settings.AvoidanceRange, 0.5f);
+        Vector3 Cohesion = BoidLogic.CohesionAlgorithm(this, Neighbours, Settings.VisualRange, 1f);
+        Vector3 Alignment = BoidLogic.AlignmentAlgorithm(this, Neighbours, Settings.VisualRange, 1f);
+        Vector3 Separation = BoidLogic.SeparationAlgorithm(this, Neighbours, Settings.AvoidanceRange, 1f);
 
         Vector3 NewVelocity = (Cohesion * Settings.CohesionWeight + Alignment * Settings.AlignmentWeight + Separation * Settings.SeparationWeight);
 
         Velocity += NewVelocity * Time.deltaTime;
-        Velocity = Vector3.ClampMagnitude(Velocity, Settings.MaxSpeed);
-        if(Velocity.magnitude < Settings.MinSpeed)
-        {
-            Velocity *= 1.5f;
-        }
 
-        transform.position += Velocity;
+        float margin = Settings.EdgeRadius;
+        float turn = Settings.EdgeWeight;
+
+        if (transform.position.x < -margin) Velocity.x += turn * Time.deltaTime;
+        if (transform.position.x > margin) Velocity.x -= turn * Time.deltaTime;
+        if (transform.position.y < -margin) Velocity.y += turn * Time.deltaTime;
+        if (transform.position.y > margin) Velocity.y -= turn * Time.deltaTime;
+
+        float speed = Velocity.magnitude;
+        if (speed > Settings.MaxSpeed)
+            Velocity = Velocity.normalized * Settings.MaxSpeed;
+        else if (speed < Settings.MinSpeed)
+            Velocity = Velocity.normalized * Settings.MinSpeed;
+
+        Velocity.z = 0;
+
+        transform.position += Velocity * Time.deltaTime;
     }
 
     public void Initialize(BoidSettings settings, List<BoidAgent> agents, Vector3 velocity)

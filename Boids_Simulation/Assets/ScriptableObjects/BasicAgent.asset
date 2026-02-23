@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6d79c6665b01664fbeda2ad2c2c1740, type: 3}
   m_Name: BasicAgent
   m_EditorClassIdentifier: 
-  MaxSpeed: 6
-  MinSpeed: 3
-  MaxSteerSpeed: 1
-  CohesionWeight: 1
-  AlignmentWeight: 1
-  SeparationWeight: 1.5
-  EdgeRadius: 50
+  MaxSpeed: 4
+  MinSpeed: 2.5
+  MaxSteerSpeed: 3
+  CohesionWeight: 0.5
+  AlignmentWeight: 1.5
+  SeparationWeight: 2.5
+  EdgeRadius: 20
   EdgeWeight: 10
-  VisualRange: 5
-  AvoidanceFactor: 1
+  VisualRange: 6
+  AvoidanceRange: 1.2
