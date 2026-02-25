@@ -5,7 +5,6 @@ using UnityEngine.UIElements;
 public class BoidAgent : MonoBehaviour
 {
     public Vector3 Velocity = Vector3.zero;
-
     private BoidSettings Settings;
     private List<BoidAgent> Agents;
 
@@ -38,6 +37,12 @@ public class BoidAgent : MonoBehaviour
         Velocity.z = 0;
 
         transform.position += Velocity * Time.deltaTime;
+
+        if (Velocity != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(Velocity);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+        }
     }
 
     public void Initialize(BoidSettings settings, List<BoidAgent> agents, Vector3 velocity)
