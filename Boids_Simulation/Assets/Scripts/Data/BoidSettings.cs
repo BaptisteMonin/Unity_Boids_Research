@@ -14,8 +14,10 @@ public class BoidSettings : ScriptableObject
     public float SeparationWeight = 1.5f;
 
     [Header("Edge")]
-    public float EdgeRadius = 50.0f;
-    public float PreRadius = 40.0f;
+    public float EdgeHorRadius = 50.0f;
+    public float EdgeVerRadius = 50.0f;
+    public float PreHorRadius = 40.0f;
+    public float PreVerRadius = 40.0f;
     public float EdgeWeight = 10.0f;
     public float PreEdgeWeight = 2.0f;
 

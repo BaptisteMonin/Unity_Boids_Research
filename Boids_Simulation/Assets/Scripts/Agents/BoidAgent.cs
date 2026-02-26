@@ -20,21 +20,23 @@ public class BoidAgent : MonoBehaviour
 
         Velocity += NewVelocity * Time.deltaTime;
 
-        float pMargin = Settings.PreRadius;
+        float phorMargin = Settings.PreHorRadius;
+        float pverMargin = Settings.PreVerRadius;
         float pTurn = Settings.PreEdgeWeight;
 
-        float margin = Settings.EdgeRadius;
+        float horMargin = Settings.EdgeHorRadius;
+        float verMargin = Settings.EdgeVerRadius;
         float turn = Settings.EdgeWeight;
 
-        if (transform.position.x < -pMargin) Velocity.x += pTurn * Time.deltaTime;
-        if (transform.position.x > pMargin) Velocity.x -= pTurn * Time.deltaTime;
-        if (transform.position.y < -pMargin) Velocity.y += pTurn * Time.deltaTime;
-        if (transform.position.y > pMargin) Velocity.y -= pTurn * Time.deltaTime;
+        if (transform.position.x < -phorMargin) Velocity.x += pTurn * Time.deltaTime;
+        if (transform.position.x > phorMargin) Velocity.x -= pTurn * Time.deltaTime;
+        if (transform.position.y < -pverMargin + 5) Velocity.y += pTurn * Time.deltaTime;
+        if (transform.position.y > pverMargin + 5) Velocity.y -= pTurn * Time.deltaTime;
 
-        if (transform.position.x < -margin) Velocity.x += turn * Time.deltaTime;
-        if (transform.position.x > margin) Velocity.x -= turn * Time.deltaTime;
-        if (transform.position.y < -margin) Velocity.y += turn * Time.deltaTime;
-        if (transform.position.y > margin) Velocity.y -= turn * Time.deltaTime;
+        if (transform.position.x < -horMargin) Velocity.x += turn * Time.deltaTime;
+        if (transform.position.x > horMargin) Velocity.x -= turn * Time.deltaTime;
+        if (transform.position.y < -verMargin + 5) Velocity.y += turn * Time.deltaTime;
+        if (transform.position.y > verMargin + 5) Velocity.y -= turn * Time.deltaTime;
 
         float speed = Velocity.magnitude;
         if (speed > Settings.MaxSpeed)

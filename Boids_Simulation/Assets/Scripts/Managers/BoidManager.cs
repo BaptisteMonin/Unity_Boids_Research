@@ -23,7 +23,7 @@ public class BoidManager : MonoBehaviour
             Agents.Add(AgentComponent);
 
             Vector2 cerclePoint = Random.insideUnitCircle * SpawnRadius;
-            Vector3 agentPosition = new Vector3(cerclePoint.x, cerclePoint.y, 0);
+            Vector3 agentPosition = new Vector3(cerclePoint.x, cerclePoint.y + 5, 0);
             Vector3 agentRotation = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
 
             Agent.transform.position = agentPosition;
