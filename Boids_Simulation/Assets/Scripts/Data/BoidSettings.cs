@@ -15,7 +15,9 @@ public class BoidSettings : ScriptableObject
 
     [Header("Edge")]
     public float EdgeRadius = 50.0f;
+    public float PreRadius = 40.0f;
     public float EdgeWeight = 10.0f;
+    public float PreEdgeWeight = 2.0f;
 
     [Header("Distance")]
     public float VisualRange = 5.0f;

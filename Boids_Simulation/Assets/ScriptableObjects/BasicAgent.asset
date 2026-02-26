@@ -15,10 +15,12 @@ MonoBehaviour:
   MaxSpeed: 4
   MinSpeed: 2.5
   MaxSteerSpeed: 3
-  CohesionWeight: 0.5
-  AlignmentWeight: 1.5
-  SeparationWeight: 4
-  EdgeRadius: 20
-  EdgeWeight: 10
+  CohesionWeight: 1.6356062
+  AlignmentWeight: 0.6437718
+  SeparationWeight: 4.4061985
+  EdgeRadius: 25
+  PreRadius: 20
+  EdgeWeight: 20
+  PreEdgeWeight: 5
   VisualRange: 6
   AvoidanceRange: 1.2

@@ -20,8 +20,16 @@ public class BoidAgent : MonoBehaviour
 
         Velocity += NewVelocity * Time.deltaTime;
 
+        float pMargin = Settings.PreRadius;
+        float pTurn = Settings.PreEdgeWeight;
+
         float margin = Settings.EdgeRadius;
         float turn = Settings.EdgeWeight;
+
+        if (transform.position.x < -pMargin) Velocity.x += pTurn * Time.deltaTime;
+        if (transform.position.x > pMargin) Velocity.x -= pTurn * Time.deltaTime;
+        if (transform.position.y < -pMargin) Velocity.y += pTurn * Time.deltaTime;
+        if (transform.position.y > pMargin) Velocity.y -= pTurn * Time.deltaTime;
 
         if (transform.position.x < -margin) Velocity.x += turn * Time.deltaTime;
         if (transform.position.x > margin) Velocity.x -= turn * Time.deltaTime;
